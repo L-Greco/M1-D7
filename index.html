@@ -1,5 +1,52 @@
 <html>
   <head>
+   
+
+    <style>
+      .myHeading {
+        color: red;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>This is the title of the page</h1>
+      <h2>This is the subtitle of the page</h2>
+    </header>
+
+    <main>
+      <hr />
+
+      <ul id="firstList">
+        <li>1st</li>
+        <li>2nd</li>
+        <li>3rd</li>
+      </ul>
+
+      <ul id="secondList">
+        <li>1st</li>
+        <li>2nd</li>
+        <li>3rd</li>
+      </ul>
+
+      <a href="strive.school">This link goes to Strive School</a>
+
+      <div>
+        <p>This text is just for the exercise</p>
+      </div>
+
+      <div>
+        <input
+          type="text"
+          id="input-field"
+          placeholder="input field for the exercise"
+        />
+      </div>
+    </main>
+    
+    <footer>
+      <p>And this text is just for the exercise too!</p>
+    </footer>
     <script>
       /* EXERCISE 1
       Write a function for changing the title of the document in something else.
@@ -48,6 +95,12 @@
        */
 
       const addToTheSecond = function (content) {
+        let newli= document.createElement("li")                            // 1st create the li element
+        //let newLiText=document.createTextNode(`${content}`)    [ can do it without the nodes actually]            // then create the text dynamically 
+         newli.innerText=`${content}` //newli.appendChild(newLiText)        // then put the text to the new li element
+        let element = document.getElementById("secondList")                // then find the list
+        element.appendChild(newli)                                         // then put the list with text to the existing list
+
         //
       };
 
@@ -56,7 +109,11 @@
       */
 
       const addParagraph = function (content) {
-        //
+        let divpara = document.querySelector("div p") // it finds the p element of the div element , can't do it with : document.getElementsByTagName("div p")
+        let newPara= document.createElement("p")     // create a new paragraph
+        newPara.innerText=`${content}`              // create the new text dynamically
+        divpara.appendChild(newPara)               // then put the paragraph to the div
+
       };
 
       /* EXERCISE 7
@@ -64,6 +121,8 @@
       */
 
       const firstUlDisappear = function () {
+        document.getElementsByTagName("ul")[0].style.display="none"  // Beautiful one line of code :D
+
         //
       };
 
@@ -72,37 +131,61 @@
       */
 
       const paintItGreen = function () {
+       let Ul= document.getElementsByTagName("ul")
+       for(i=0;i<Ul.length;i++){
+       Ul[i].style.color="green"}
         //
       };
 
       /* EXERCISE 9
       Make the heading of the page change color every time the user clicks on it.
       */
+      const rngC = function (){
+    let red = Math.round(Math.random()*255)    // RANDOM COLOR GENERATOR  (random red )
+    let green = Math.round(Math.random()*255)  // RANDOM COLOR GENERATOR  (random green )
+    let blue = Math.round(Math.random()*255)   // RANDOM COLOR GENERATOR  (random blue )
+    return `rgb(${red},${green},${blue})`
+}
 
-      const makeItClickable = function () {
-        //
-      };
+   
+
+       const makeItClickable = function () {
+         document.getElementsByTagName("h1")[0].setAttribute("onclick","ItsClickable()")   // 1st function , puts attribute onclick="itsClickable()"
+           }
+        const ItsClickable = function () {        // 2nd function, changes the style with rng color  // onclck means after it's clicked it invokes a function for ex. itsClickable()
+         document.getElementsByTagName("h1")[0].style.color= `${rngC()}`
+        } //                 // question : why i cant just: document.getElementsByTagName("h1")[0].setAttribute("onclick","ItsClickable()") //it doesnt work out of a fucntion
+                             // answer : cause script was on the top of the page and therefore js couldnt find 
 
       /* EXERCISE 10
       Change the footer text with something else when the user clicks on it.
       */
 
       const changeFooterText = function () {
-        //
-      };
+        document.querySelector("footer p").setAttribute("onclick","somethingElse()")         //Same approach as ex.9
+      }
+        const somethingElse= function() { 
+          document.querySelector("footer p").innerText="Something else"
+        }//
+      
 
       /* EXERCISE 11
       Attach an event listener to the input field in the page for console logging its value just after any keystroke.
       */
 
       const inputField = document.getElementById("input-field");
+      inputField.addEventListener("keypress",function  (e) { console.log(inputField.value)})
+     
+
       // ...
 
       /* EXERCISE 12
       Create a new welcome alert message when the page successfully loads.
       */
 
-      window.onload = function () {
+      window.onload = function () {            // window.onload ---> do something when the page is fully loaded.
+        alert("Hello !")
+        
         //
       };
 
@@ -110,51 +193,5 @@
       Use HTML5 tags to divide the content of the page in a more semantic way.
       */
     </script>
-
-    <style>
-      .myHeading {
-        color: red;
-      }
-    </style>
-  </head>
-  <body>
-    <header>
-      <h1>This is the title of the page</h1>
-      <h2>This is the subtitle of the page</h2>
-    </header>
-
-    <main>
-      <hr />
-
-      <ul id="firstList">
-        <li>1st</li>
-        <li>2nd</li>
-        <li>3rd</li>
-      </ul>
-
-      <ul id="secondList">
-        <li>1st</li>
-        <li>2nd</li>
-        <li>3rd</li>
-      </ul>
-
-      <a href="strive.school">This link goes to Strive School</a>
-
-      <div>
-        <p>This text is just for the exercise</p>
-      </div>
-
-      <div>
-        <input
-          type="text"
-          id="input-field"
-          placeholder="input field for the exercise"
-        />
-      </div>
-    </main>
-    
-    <footer>
-      <p>And this text is just for the exercise too!</p>
-    </footer>
   </body>
 </html>
